@@ -1,18 +1,14 @@
 #!/bin/bash
 docker pull mysql:5.7.30
-cd /home
-mkdir mysql
-cd mysql
 #/mysql/data 是数据库文件存放的地方。必须要挂载到容器外，否则容器重启一切数据消失
-mkdir data
+mkdir -p /home/mysql/data
 #/mysql/log 是数据库主生的log。建议挂载到容器外。
-mkdir log
-mkdir config
-cd config
+mkdir -p /home/mysql/log
+mkdir -p /home/mysql/config
 #mysql/config/my.cnf 是数据库的配置文件
-touch my.cnf
+touch /home/mysql/config/my.cnf
 #若是mysql8请加入default_authentication_plugin= mysql_native_password （这个是因应mysql8的安全机制升级而需要修改的配置，不配置的话将无法登录管理）
-cat>~/my.cnf<<EOF
+cat>/home/mysql/config/my.cnf<<EOF
 [mysqld]
 pid-file        = /var/run/mysqld/mysqld.pid
 socket          = /var/run/mysqld/mysqld.sock
