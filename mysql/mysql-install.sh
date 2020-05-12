@@ -19,6 +19,7 @@ symbolic-links=0
 # Custom config should go here
 !includedir /etc/mysql/conf.d/
 EOF
+
 #/etc/localtime:/etc/localtime:ro 是让容器的时钟与宿主机时钟同步，避免时区的问题，ro是read only的意思，就是只读。
 docker run \
     -p 3306:3306 \
